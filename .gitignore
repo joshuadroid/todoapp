@@ -1,0 +1,9 @@
+bin/
+lib/
+__pycache__/
+.pytest_cache
+tasks.csv
+tasks copy 2.csv
+venv
+.flake8
+todolist.ipynb
