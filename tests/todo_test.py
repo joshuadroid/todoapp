@@ -1,4 +1,3 @@
-import pytest
 from modules.task import Task
 
 
