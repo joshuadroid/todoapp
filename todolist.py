@@ -14,6 +14,7 @@ myTaskList.build_initial_tasks()
 
 def clear_terminal(func):
     def wrapper():
+        # adding test comment
         term.clear()
         func()
 
