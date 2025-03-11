@@ -12,12 +12,21 @@ myTaskList = TaskList("My Tasks")
 myTaskList.build_initial_tasks()
 
 
+def clear_terminal(func):
+    def wrapper():
+        term.clear()
+        func()
+
+    return wrapper
+
+
+@clear_terminal
 def list_tasks():
-    term.clear()
     df = myTaskList.get_dataframe_tasks(sendback=True)
     print(df)
 
 
+@clear_terminal
 def list_active_tasks():
     term.clear()
     df = myTaskList.get_dataframe_tasks(sendback=True)
@@ -26,8 +35,8 @@ def list_active_tasks():
     # future improvement - could pass a query to the get_dataframe_tasks function
 
 
+@clear_terminal
 def add_task():
-    term.clear()
     term.print("What is the name of your task?\n\n", 0.01)
     name = input()
     term.clear()
