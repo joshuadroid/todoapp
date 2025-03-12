@@ -4,12 +4,20 @@ from modules.terminal import Terminal
 from modules.prompt import Prompt
 import time
 from rich.console import Console
+from flask import Flask
 
 term = Terminal()
 console = Console()
 
 myTaskList = TaskList("My Tasks")
 myTaskList.build_initial_tasks()
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 
 def clear_terminal(func):
@@ -20,13 +28,23 @@ def clear_terminal(func):
     return wrapper
 
 
-@clear_terminal
+# TODO Add sanitize for input
+# def sanitize_input(func):
+#     def wrapper():
+#         make sure priority is int
+#         make sure status is in ("to do" "in progress" or "done")
+#         return func
+#     someReturnVal = wrapper()
+#     return someReturnVal
+
+
+# @clear_terminal
 def list_tasks():
     df = myTaskList.get_dataframe_tasks(sendback=True)
     print(df)
 
 
-@clear_terminal
+# @clear_terminal
 def list_active_tasks():
     term.clear()
     df = myTaskList.get_dataframe_tasks(sendback=True)
@@ -35,7 +53,8 @@ def list_active_tasks():
     # future improvement - could pass a query to the get_dataframe_tasks function
 
 
-@clear_terminal
+# @clear_terminal
+# @sanitize_input
 def add_task():
     term.print("What is the name of your task?\n\n", 0.01)
     name = input()
@@ -72,9 +91,9 @@ def change_task():
     time.sleep(2)
 
 
+# @clear_terminal
 def delete_task():
     df = myTaskList.get_dataframe_tasks(sendback=True)
-    term.clear()
     term.print(df)
     term.print("\nWhat task would you like to delete?\n\n", 0.01)
     selected_task = input()
