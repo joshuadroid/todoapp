@@ -5,6 +5,7 @@ from modules.prompt import Prompt
 import time
 from rich.console import Console
 from flask import Flask
+import json
 
 term = Terminal()
 console = Console()
@@ -39,9 +40,12 @@ def clear_terminal(func):
 
 
 # @clear_terminal
+@app.route("/tasks/")
 def list_tasks():
-    df = myTaskList.get_dataframe_tasks(sendback=True)
-    print(df)
+    # Commented out Print Code
+    # myTaskList.get_tasks()
+    print("Listed Tasks!")
+    return json.dumps(myTaskList.get_tasks())
 
 
 # @clear_terminal
@@ -125,17 +129,17 @@ main_prompt = Prompt(
     }
 )
 
-change_prompt = Prompt({"Task Name": 1, "Task Status": 2, "Task Priority": 3})
+# change_prompt = Prompt({"Task Name": 1, "Task Status": 2, "Task Priority": 3})
 
-try:
-    term.clear()
-    while 1 == 1:
-        try:
-            term.print("\nWhat would you like to do?\n\n", 0.01)
-            term.ask(main_prompt)
-        except ValueError as e:
-            term.clear()
-            console.print(e, style="white on blue")
-            time.sleep(1)
-except KeyboardInterrupt:
-    exit_program()
+# try:
+#     term.clear()
+#     while 1 == 1:
+#         try:
+#             term.print("\nWhat would you like to do?\n\n", 0.01)
+#             term.ask(main_prompt)
+#         except ValueError as e:
+#             term.clear()
+#             console.print(e, style="white on blue")
+#             time.sleep(1)
+# except KeyboardInterrupt:
+#     exit_program()

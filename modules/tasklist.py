@@ -60,25 +60,23 @@ class TaskList:
     #     df = pd.DataFrame(data=data, columns=columns).sort_values('priority')
     #     return df
 
-    def get_dataframe_tasks(self, sendback=True):
-        data = []
+    def __get_list_of_tasks(self):
+        tasks = []
         for x in self.tasks:
             list_data = []
             list_data.append(x.name)
             list_data.append(x.get_status())
-            list_data.append(x.get_priority())
-            data.append(list_data)
+            list_data.append(int(x.get_priority()))
+            tasks.append(list_data)
             # print(data)
-        df = pd.DataFrame(data=data, columns=columns).sort_values("priority")
-        if sendback:
-            return df
-        else:
-            console.print(df)
+        return tasks
 
     def get_tasks(self):
-        for x in self.tasks:
-            console.print(f"Task: {x.name} || priority #{x.get_priority()} || status: {x.get_status()}")
-            # print(x)
+        # for x in self.tasks:
+            # console.print(f"Task: {x.name} || priority #{x.get_priority()} || status: {x.get_status()}")
+        tasks = self.__get_list_of_tasks()
+        print(tasks)
+        return tasks
 
     def get_active_tasks(self):
         for x in self.tasks:

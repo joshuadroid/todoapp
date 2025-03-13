@@ -7,3 +7,4 @@ tasks copy 2.csv
 venv
 .flake8
 todolist.ipynb
+.DS_Store
