@@ -49,12 +49,9 @@ def list_tasks():
 
 
 # @clear_terminal
+@app.route("/active_tasks")
 def list_active_tasks():
-    term.clear()
-    df = myTaskList.get_dataframe_tasks(sendback=True)
-    # print(df)
-    print(df.loc[df["status"] != "done"])
-    # future improvement - could pass a query to the get_dataframe_tasks function
+    return json.dumps(myTaskList.get_active_tasks())
 
 
 # @clear_terminal
