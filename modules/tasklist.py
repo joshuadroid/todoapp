@@ -73,7 +73,7 @@ class TaskList:
 
     def get_tasks(self):
         # for x in self.tasks:
-            # console.print(f"Task: {x.name} || priority #{x.get_priority()} || status: {x.get_status()}")
+        # console.print(f"Task: {x.name} || priority #{x.get_priority()} || status: {x.get_status()}")
         tasks = self.__get_list_of_tasks()
         print(tasks)
         return tasks
@@ -83,11 +83,10 @@ class TaskList:
         num = 0
         for x in tasks:
             print(str(x[1]))
-            if str(x[1]).lower() == 'done':
+            if str(x[1]).lower() == "done":
                 tasks.pop(num)
             num += 1
         return tasks
-
 
     def add_to_task_list(self, task):
         self.tasks.append(task)

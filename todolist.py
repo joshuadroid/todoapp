@@ -42,8 +42,6 @@ def clear_terminal(func):
 # @clear_terminal
 @app.route("/tasks/")
 def list_tasks():
-    # Commented out Print Code
-    # myTaskList.get_tasks()
     print("Listed Tasks!")
     return json.dumps(myTaskList.get_tasks())
 
@@ -51,6 +49,7 @@ def list_tasks():
 # @clear_terminal
 @app.route("/active_tasks")
 def list_active_tasks():
+    print("Listed Active Tasks!")
     return json.dumps(myTaskList.get_active_tasks())
 
 
