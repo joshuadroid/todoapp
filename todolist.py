@@ -4,7 +4,7 @@ from modules.terminal import Terminal
 from modules.prompt import Prompt
 import time
 from rich.console import Console
-from flask import Flask
+from flask import Flask, redirect, url_for, request
 import json
 
 term = Terminal()
@@ -55,15 +55,14 @@ def list_active_tasks():
 
 # @clear_terminal
 # @sanitize_input
+@app.route("/addtask", methods=['POST', 'GET'])
 def add_task():
-    term.print("What is the name of your task?\n\n", 0.01)
-    name = input()
-    term.clear()
-    term.print("What is the status of your task?\n\n", 0.01)
-    status = input()
-    term.clear()
-    term.print("What is the priority of your task?\n\n", 0.01)
-    priority = int(input())
+    print(request.method)
+    print(request.args)
+    print(request.form)
+    name = request.form['newtask']
+    status = request.form['newstatus']
+    priority = int(request.form['newpriority'])
     new_task = Task(name)
     new_task.add_priority(priority)
     new_task.add_status(status)
@@ -112,9 +111,6 @@ def exit_program():
     term.clear()
     exit()
 
-
-time.sleep(1)
-
 main_prompt = Prompt(
     {
         "List Tasks": list_tasks,
@@ -124,6 +120,9 @@ main_prompt = Prompt(
         "Delete a Task": delete_task,
     }
 )
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 # change_prompt = Prompt({"Task Name": 1, "Task Status": 2, "Task Priority": 3})
 
