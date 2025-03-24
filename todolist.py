@@ -6,9 +6,13 @@ import time
 from rich.console import Console
 from flask import Flask, redirect, url_for, request
 import json
+import sqlite3
 
 term = Terminal()
 console = Console()
+# Starting up SQLite
+con = sqlite3.connect("tutorial.db")
+cur = con.cursor()
 
 myTaskList = TaskList("My Tasks")
 myTaskList.build_initial_tasks()

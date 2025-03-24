@@ -1,6 +1,7 @@
 import pandas as pd
 from modules.task import Task
 from rich.console import Console
+import sqlite3
 
 console = Console(style="blue bold")
 
@@ -15,12 +16,22 @@ def validate_status(status):
 columns = ["name", "status", "priority"]
 file_path = "tasks.csv"
 
+con = sqlite3.connect("tutorial.db")
+
 
 class TaskList:
 
     def __init__(self, name):
         self.name = name
         self.tasks = []
+
+    def build_initial_tasks_with_sqlite(self):
+        # try to open sqlite
+        # except FileNotFound:
+            # build out sqlite file for tasks
+
+            # return tasks
+            # save file
 
     def build_initial_tasks(self):
         try:
@@ -46,19 +57,6 @@ class TaskList:
             # task = df['name'][g]
             g += 1
         # return(df)
-
-    # Decommission!
-    # def return_dataframe_tasks(self):
-    #     data = []
-    #     for x in self.tasks:
-    #         list_data = []
-    #         list_data.append(x.name)
-    #         list_data.append(x.get_status())
-    #         list_data.append(x.get_priority())
-    #         data.append(list_data)
-    #         # print(data)
-    #     df = pd.DataFrame(data=data, columns=columns).sort_values('priority')
-    #     return df
 
     def __get_list_of_tasks(self):
         tasks = []
