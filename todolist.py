@@ -69,22 +69,12 @@ def add_task():
         return myTaskList.get_tasks()
     elif request.method == "GET":
         return myTaskList.get_tasks()
+    elif request.method == "DELETE":
+        # Get the task list
+        # Figure out how to delete the task
+        # Fix the delete task method
     else:
-        return NotImplementedError("Method Not Implemented", 6969)
-        
-    
-
-
-    # name = request.form['newtask']
-    # status = request.form['newstatus']
-    # priority = int(request.form['newpriority'])
-    # new_task = Task(name)
-    # new_task.add_priority(priority)
-    # new_task.add_status(status)
-    # 
-    # myTaskList.get_tasks()
-    # time.sleep(2)
-    # myTaskList.save_tasks()
+        raise NotImplementedError("Method Not Implemented", 6969)
 
 
 def change_task():
