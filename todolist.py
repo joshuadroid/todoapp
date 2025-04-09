@@ -43,37 +43,47 @@ def clear_terminal(func):
 #     return someReturnVal
 
 
-# @clear_terminal
 @app.route("/tasks/")
 def list_tasks():
     print("Listed Tasks!")
     return json.dumps(myTaskList.get_tasks())
 
 
-# @clear_terminal
 @app.route("/active_tasks")
 def list_active_tasks():
     print("Listed Active Tasks!")
     return json.dumps(myTaskList.get_active_tasks())
 
 
-# @clear_terminal
-# @sanitize_input
 @app.route("/addtask", methods=['POST', 'GET'])
 def add_task():
-    print(request.method)
-    print(request.args)
-    print(request.form)
-    name = request.form['newtask']
-    status = request.form['newstatus']
-    priority = int(request.form['newpriority'])
-    new_task = Task(name)
-    new_task.add_priority(priority)
-    new_task.add_status(status)
-    myTaskList.add_to_task_list(new_task)
-    myTaskList.get_tasks()
-    time.sleep(2)
-    myTaskList.save_tasks()
+    # print(request.args)
+    # print(request.data)
+    if request.method == "POST":
+        print(request.json['task'], " ", request.json['status'])
+        data = request.json
+        new_task = Task(data['task'])
+        new_task.add_status(data['status'])
+        new_task.add_priority(data['priority'])
+        myTaskList.add_to_task_list(new_task)
+        return myTaskList.get_tasks()
+    elif request.method == "GET":
+        return myTaskList.get_tasks()
+    else:
+        raise NotImplementedError("Method Not Implemented")
+    
+
+
+    # name = request.form['newtask']
+    # status = request.form['newstatus']
+    # priority = int(request.form['newpriority'])
+    # new_task = Task(name)
+    # new_task.add_priority(priority)
+    # new_task.add_status(status)
+    # 
+    # myTaskList.get_tasks()
+    # time.sleep(2)
+    # myTaskList.save_tasks()
 
 
 def change_task():
