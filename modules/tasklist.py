@@ -32,6 +32,7 @@ class TaskList:
 
             # return tasks
             # save file
+        return
 
     def build_initial_tasks(self):
         try:
@@ -56,7 +57,7 @@ class TaskList:
             self.add_to_task_list(task)
             # task = df['name'][g]
             g += 1
-        # return(df)
+        return(df)
 
     def __get_list_of_tasks(self):
         tasks = []

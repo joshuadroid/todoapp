@@ -73,6 +73,7 @@ def add_task():
         # Get the task list
         # Figure out how to delete the task
         # Fix the delete task method
+        print("凸( •̀_•́ )凸")
     else:
         raise NotImplementedError("Method Not Implemented", 6969)
 
