@@ -80,7 +80,6 @@ class TaskList:
         tasks = self.__get_list_of_tasks()
         num = 0
         for x in tasks:
-            print(str(x[1]))
             if str(x[1]).lower() == "done":
                 tasks.pop(num)
             num += 1

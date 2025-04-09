@@ -55,7 +55,7 @@ def list_active_tasks():
     return json.dumps(myTaskList.get_active_tasks())
 
 
-@app.route("/addtask", methods=['POST', 'GET'])
+@app.route("/addtask", methods=['POST', 'GET', 'DELETE'])
 def add_task():
     # print(request.args)
     # print(request.data)
@@ -70,7 +70,8 @@ def add_task():
     elif request.method == "GET":
         return myTaskList.get_tasks()
     else:
-        raise NotImplementedError("Method Not Implemented")
+        return NotImplementedError("Method Not Implemented", 6969)
+        
     
 
 
