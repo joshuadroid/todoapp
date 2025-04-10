@@ -57,11 +57,11 @@ def list_active_tasks():
 
 @app.route("/addtask", methods=['POST', 'GET', 'DELETE'])
 def add_task():
+    print(request.json['task'], " ", request.json['status'])
+    data = request.json
     # print(request.args)
     # print(request.data)
     if request.method == "POST":
-        print(request.json['task'], " ", request.json['status'])
-        data = request.json
         new_task = Task(data['task'])
         new_task.add_status(data['status'])
         new_task.add_priority(data['priority'])
@@ -70,9 +70,10 @@ def add_task():
     elif request.method == "GET":
         return myTaskList.get_tasks()
     elif request.method == "DELETE":
-        # Get the task list
+        myTaskList.delete_task(data['priority'])
         # Figure out how to delete the task
         # Fix the delete task method
+        # remove this 'v' when done 
         print("凸( •̀_•́ )凸")
     else:
         raise NotImplementedError("Method Not Implemented", 6969)

@@ -100,7 +100,10 @@ class TaskList:
 
     def delete_task(self, task):
         x = self.select_task_from_list(task)
-        print(x)
+        the_list = self.__get_list_of_tasks
+        print(the_list)
+        # TODO: look into serializer to print object
+        # figure out how to delete object based on priority
 
     def save_tasks(self):
         df = self.get_dataframe_tasks(sendback=True)
