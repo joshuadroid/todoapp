@@ -55,26 +55,29 @@ def list_active_tasks():
     return json.dumps(myTaskList.get_active_tasks())
 
 
-@app.route("/addtask", methods=['POST', 'GET', 'DELETE'])
+@app.route("/addtask", methods=["POST", "GET", "DELETE"])
 def add_task():
-    print(request.json['task'], " ", request.json['status'])
+    print(request.json["task"], " ", request.json["status"])
     data = request.json
     # print(request.args)
     # print(request.data)
     if request.method == "POST":
-        new_task = Task(data['task'])
-        new_task.add_status(data['status'])
-        new_task.add_priority(data['priority'])
+        new_task = Task(data["task"])
+        new_task.add_status(data["status"])
+        new_task.add_priority(data["priority"])
         myTaskList.add_to_task_list(new_task)
+        myTaskList.save_tasks()
         return myTaskList.get_tasks()
     elif request.method == "GET":
         return myTaskList.get_tasks()
     elif request.method == "DELETE":
-        myTaskList.delete_task(data['priority'])
-        # Figure out how to delete the task
-        # Fix the delete task method
-        # remove this 'v' when done 
-        print("凸( •̀_•́ )凸")
+        print("Starting to print the data")
+        print(data["priority"])
+        print("^ ^ This is the data")
+        myTaskList.delete_task(data["priority"])
+        myTaskList.get_active_tasks()
+        myTaskList.save_tasks()
+        return myTaskList.get_active_tasks()
     else:
         raise NotImplementedError("Method Not Implemented", 6969)
 
@@ -118,6 +121,7 @@ def exit_program():
     term.clear()
     exit()
 
+
 main_prompt = Prompt(
     {
         "List Tasks": list_tasks,
@@ -128,7 +132,7 @@ main_prompt = Prompt(
     }
 )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
 
 # change_prompt = Prompt({"Task Name": 1, "Task Status": 2, "Task Priority": 3})

@@ -25,6 +25,9 @@ class Task:
         self.__priority = priority
         return self.__priority
 
+    def get_name(self):
+        return self.name
+
     def get_status(self):
         # print(self.__status)
         return self.__status
